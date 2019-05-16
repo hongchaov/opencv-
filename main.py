@@ -1,4 +1,4 @@
-import numpy as np
+impoimport numpy as np
 import cv2
 
 def main():
@@ -15,7 +15,7 @@ def main():
         cv2.imshow("original", frame)
         # 将BGR转换为HSV
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        # 限定在HSV绿色的范围
+        # 限定在HSV蓝色的范围
         blue_lower = np.array([blue_val - 10, 100, 100])
         blue_upper = np.array([blue_val + 10, 255, 255])
 
@@ -32,8 +32,8 @@ def main():
         blue_closing = cv2.morphologyEx(blue_res, cv2.MORPH_CLOSE, kernel)
 
         # 转换为黑白图像
-        green_gray = cv2.cvtColor(blue_closing, cv2.COLOR_BGR2GRAY)
-        (thresh2, blue_bw) = cv2.threshold(green_gray, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+        blue_gray = cv2.cvtColor(blue_closing, cv2.COLOR_BGR2GRAY)
+        (thresh2, blue_bw) = cv2.threshold(blue_gray, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 
         # 计算像素变化
         blue_black = cv2.countNonZero(blue_bw)
@@ -42,7 +42,7 @@ def main():
 
         # 显示结果帧
         both = np.hstack(blue_bw)
-        cv2.imshow('RED_GREEN', both)
+        cv2.imshow('BLUE', both)
 
         # 按q退出
         if cv2.waitKey(3) & 0xFF == ord('q'):
@@ -55,3 +55,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
